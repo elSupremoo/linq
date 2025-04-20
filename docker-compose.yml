@@ -1,0 +1,21 @@
+
+
+services:
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+  
+  app:
+    build: .
+    depends_on:
+      - mongo
+    volumes:
+      - .:/app
+    stdin_open: true
+    tty: true
+  
+volumes:
+  mongo-data: {}
